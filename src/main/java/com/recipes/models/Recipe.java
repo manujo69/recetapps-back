@@ -40,9 +40,13 @@ public class Recipe {
     @NotNull
     private Integer servings;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "recipe_categories",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -61,7 +65,7 @@ public class Recipe {
     public Recipe() {}
 
     public Recipe(String title, String description, String ingredients, String instructions,
-                  Integer prepTime, Integer cookTime, Integer servings, Category category, User user) {
+                  Integer prepTime, Integer cookTime, Integer servings, List<Category> categories, User user) {
         this.title = title;
         this.description = description;
         this.ingredients = ingredients;
@@ -69,7 +73,7 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.servings = servings;
-        this.category = category;
+        this.categories = categories != null ? categories : new ArrayList<>();
         this.user = user;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
@@ -100,8 +104,8 @@ public class Recipe {
     public Integer getServings() { return servings; }
     public void setServings(Integer servings) { this.servings = servings; }
 
-    public Category getCategory() { return category; }
-    public void setCategory(Category category) { this.category = category; }
+    public List<Category> getCategories() { return categories; }
+    public void setCategories(List<Category> categories) { this.categories = categories; }
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }

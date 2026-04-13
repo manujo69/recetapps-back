@@ -1,5 +1,6 @@
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/UserDetailsServiceImpl.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/RecipesBackApplication.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/dto/RecipeSummaryDTO.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/models/RecipeImage.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/services/RecipeService.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/JwtAuthenticationFilter.java

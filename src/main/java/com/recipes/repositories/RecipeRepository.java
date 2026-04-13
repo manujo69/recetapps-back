@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    List<Recipe> findByCategoryId(Long categoryId);
+    List<Recipe> findByCategoriesId(Long categoryId);
 
     List<Recipe> findByUserId(Long userId);
 

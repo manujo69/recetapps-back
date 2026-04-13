@@ -2,9 +2,9 @@ package com.recipes.services;
 
 import com.recipes.dto.RecipeDTO;
 import com.recipes.dto.RecipeImageDTO;
+import com.recipes.dto.RecipeSummaryDTO;
 import com.recipes.models.Category;
 import com.recipes.models.Recipe;
-import com.recipes.models.RecipeImage;
 import com.recipes.models.User;
 import com.recipes.repositories.CategoryRepository;
 import com.recipes.repositories.RecipeRepository;
@@ -33,9 +33,9 @@ public class RecipeService {
     @Autowired
     private RecipeImageRepository recipeImageRepository;
 
-    public List<RecipeDTO> getAllRecipes() {
+    public List<RecipeSummaryDTO> getAllRecipes() {
         return recipeRepository.findAll().stream()
-                .map(this::convertToDTO)
+                .map(this::convertToSummaryDTO)
                 .collect(Collectors.toList());
     }
 
@@ -48,11 +48,9 @@ public class RecipeService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Category category = null;
-        if (recipeDTO.getCategoryId() != null) {
-            category = categoryRepository.findById(recipeDTO.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found"));
-        }
+        List<Category> categories = recipeDTO.getCategoryIds() != null
+                ? categoryRepository.findAllById(recipeDTO.getCategoryIds())
+                : new java.util.ArrayList<>();
 
         Recipe recipe = new Recipe(
                 recipeDTO.getTitle(),
@@ -62,7 +60,7 @@ public class RecipeService {
                 recipeDTO.getPrepTime(),
                 recipeDTO.getCookTime(),
                 recipeDTO.getServings(),
-                category,
+                categories,
                 user
         );
 
@@ -79,10 +77,9 @@ public class RecipeService {
             throw new RuntimeException("Unauthorized");
         }
 
-        if (recipeDTO.getCategoryId() != null) {
-            Category category = categoryRepository.findById(recipeDTO.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found"));
-            recipe.setCategory(category);
+        if (recipeDTO.getCategoryIds() != null) {
+            List<Category> categories = categoryRepository.findAllById(recipeDTO.getCategoryIds());
+            recipe.setCategories(categories);
         }
 
         recipe.setTitle(recipeDTO.getTitle());
@@ -109,22 +106,34 @@ public class RecipeService {
         recipeRepository.delete(recipe);
     }
 
-    public List<RecipeDTO> getRecipesByCategory(Long categoryId) {
-        return recipeRepository.findByCategoryId(categoryId).stream()
-                .map(this::convertToDTO)
+    public List<RecipeSummaryDTO> getRecipesByCategory(Long categoryId) {
+        return recipeRepository.findByCategoriesId(categoryId).stream()
+                .map(this::convertToSummaryDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<RecipeDTO> getRecipesByUser(Long userId) {
+    public List<RecipeSummaryDTO> getRecipesByUser(Long userId) {
         return recipeRepository.findByUserId(userId).stream()
-                .map(this::convertToDTO)
+                .map(this::convertToSummaryDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<RecipeDTO> searchRecipes(String keyword) {
+    public List<RecipeSummaryDTO> searchRecipes(String keyword) {
         return recipeRepository.searchByKeyword(keyword).stream()
-                .map(this::convertToDTO)
+                .map(this::convertToSummaryDTO)
                 .collect(Collectors.toList());
+    }
+
+    private RecipeSummaryDTO convertToSummaryDTO(Recipe recipe) {
+        String firstImageUrl = recipe.getImages().isEmpty() ? null : recipe.getImages().get(0).getUrl();
+        return new RecipeSummaryDTO(
+                recipe.getId(),
+                recipe.getTitle(),
+                firstImageUrl,
+                recipe.getPrepTime(),
+                recipe.getCookTime(),
+                recipe.getServings()
+        );
     }
 
     private RecipeDTO convertToDTO(Recipe recipe) {
@@ -137,9 +146,13 @@ public class RecipeService {
         dto.setPrepTime(recipe.getPrepTime());
         dto.setCookTime(recipe.getCookTime());
         dto.setServings(recipe.getServings());
-        if (recipe.getCategory() != null) {
-            dto.setCategoryId(recipe.getCategory().getId());
-            dto.setCategoryName(recipe.getCategory().getName());
+        if (recipe.getCategories() != null && !recipe.getCategories().isEmpty()) {
+            dto.setCategoryIds(recipe.getCategories().stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toList()));
+            dto.setCategoryNames(recipe.getCategories().stream()
+                    .map(Category::getName)
+                    .collect(Collectors.toList()));
         }
         if (recipe.getUser() != null) {
             dto.setUserId(recipe.getUser().getId());

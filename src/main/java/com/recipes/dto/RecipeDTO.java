@@ -42,11 +42,11 @@ public class RecipeDTO {
     @NotNull
     private Integer servings;
 
-    @Schema(description = "ID of the category this recipe belongs to", example = "2")
-    private Long categoryId;
+    @Schema(description = "IDs of the categories this recipe belongs to", example = "[2, 5]")
+    private List<Long> categoryIds;
 
-    @Schema(description = "Category name (populated on read)", example = "Pasta", accessMode = Schema.AccessMode.READ_ONLY)
-    private String categoryName;
+    @Schema(description = "Category names (populated on read)", example = "[\"Pasta\", \"Italian\"]", accessMode = Schema.AccessMode.READ_ONLY)
+    private List<String> categoryNames;
 
     @Schema(description = "ID of the user who created the recipe", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long userId;
@@ -91,11 +91,11 @@ public class RecipeDTO {
     public Integer getServings() { return servings; }
     public void setServings(Integer servings) { this.servings = servings; }
 
-    public Long getCategoryId() { return categoryId; }
-    public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+    public List<Long> getCategoryIds() { return categoryIds; }
+    public void setCategoryIds(List<Long> categoryIds) { this.categoryIds = categoryIds; }
 
-    public String getCategoryName() { return categoryName; }
-    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+    public List<String> getCategoryNames() { return categoryNames; }
+    public void setCategoryNames(List<String> categoryNames) { this.categoryNames = categoryNames; }
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }

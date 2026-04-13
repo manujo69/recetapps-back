@@ -1,7 +1,7 @@
 package com.recipes.controllers;
 
 import com.recipes.dto.RecipeDTO;
-import com.recipes.services.AuthService;
+import com.recipes.dto.RecipeSummaryDTO;
 import com.recipes.services.RecipeService;
 import com.recipes.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,8 +27,8 @@ public class RecipeController {
 
     @GetMapping
     @Operation(summary = "Get all recipes")
-    public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
-        List<RecipeDTO> recipes = recipeService.getAllRecipes();
+    public ResponseEntity<List<RecipeSummaryDTO>> getAllRecipes() {
+        List<RecipeSummaryDTO> recipes = recipeService.getAllRecipes();
         return ResponseEntity.ok(recipes);
     }
 
@@ -69,22 +69,22 @@ public class RecipeController {
 
     @GetMapping("/category/{categoryId}")
     @Operation(summary = "Get recipes by category")
-    public ResponseEntity<List<RecipeDTO>> getRecipesByCategory(@PathVariable Long categoryId) {
-        List<RecipeDTO> recipes = recipeService.getRecipesByCategory(categoryId);
+    public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByCategory(@PathVariable Long categoryId) {
+        List<RecipeSummaryDTO> recipes = recipeService.getRecipesByCategory(categoryId);
         return ResponseEntity.ok(recipes);
     }
 
     @GetMapping("/user/{userId}")
     @Operation(summary = "Get recipes by user")
-    public ResponseEntity<List<RecipeDTO>> getRecipesByUser(@PathVariable Long userId) {
-        List<RecipeDTO> recipes = recipeService.getRecipesByUser(userId);
+    public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByUser(@PathVariable Long userId) {
+        List<RecipeSummaryDTO> recipes = recipeService.getRecipesByUser(userId);
         return ResponseEntity.ok(recipes);
     }
 
     @GetMapping("/search")
     @Operation(summary = "Search recipes by keyword")
-    public ResponseEntity<List<RecipeDTO>> searchRecipes(@RequestParam String keyword) {
-        List<RecipeDTO> recipes = recipeService.searchRecipes(keyword);
+    public ResponseEntity<List<RecipeSummaryDTO>> searchRecipes(@RequestParam String keyword) {
+        List<RecipeSummaryDTO> recipes = recipeService.searchRecipes(keyword);
         return ResponseEntity.ok(recipes);
     }
 
