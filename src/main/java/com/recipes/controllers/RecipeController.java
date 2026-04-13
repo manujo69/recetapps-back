@@ -67,6 +67,14 @@ public class RecipeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/categories")
+    @Operation(summary = "Update categories of a recipe")
+    public ResponseEntity<RecipeDTO> updateCategories(@PathVariable Long id, @RequestBody List<Long> categoryIds, Authentication authentication) {
+        String username = authentication.getName();
+        Long userId = getUserIdFromUsername(username);
+        return ResponseEntity.ok(recipeService.updateCategories(id, categoryIds, userId));
+    }
+
     @GetMapping("/category/{categoryId}")
     @Operation(summary = "Get recipes by category")
     public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByCategory(@PathVariable Long categoryId) {

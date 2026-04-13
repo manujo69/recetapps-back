@@ -1,12 +1,16 @@
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/UserDetailsServiceImpl.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/models/Favorite.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/RecipesBackApplication.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/dto/RecipeSummaryDTO.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/models/RecipeImage.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/services/RecipeService.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/controllers/FavoriteController.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/repositories/FavoriteRepository.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/JwtAuthenticationFilter.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/repositories/RecipeRepository.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/services/AuthService.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/SecurityConfig.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/models/FavoriteId.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/dto/RecipeDTO.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/services/FileStorageService.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/controllers/AuthController.java
@@ -18,6 +22,7 @@
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/repositories/CategoryRepository.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/config/OpenApiConfig.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/dto/AuthRequest.java
+/home/manu/Projects/recipes-back/src/main/java/com/recipes/services/FavoriteService.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/services/UserService.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/dto/AuthResponse.java
 /home/manu/Projects/recipes-back/src/main/java/com/recipes/repositories/UserRepository.java

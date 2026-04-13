@@ -2,6 +2,8 @@ package com.recipes.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.List;
+
 @Schema(description = "Recipe summary for list views")
 public class RecipeSummaryDTO {
 
@@ -23,15 +25,19 @@ public class RecipeSummaryDTO {
     @Schema(description = "Number of servings", example = "4")
     private Integer servings;
 
+    @Schema(description = "IDs of the categories this recipe belongs to", example = "[2, 5]")
+    private List<Long> categoryIds;
+
     public RecipeSummaryDTO() {}
 
-    public RecipeSummaryDTO(Long id, String title, String firstImageUrl, Integer prepTime, Integer cookTime, Integer servings) {
+    public RecipeSummaryDTO(Long id, String title, String firstImageUrl, Integer prepTime, Integer cookTime, Integer servings, List<Long> categoryIds) {
         this.id = id;
         this.title = title;
         this.firstImageUrl = firstImageUrl;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.servings = servings;
+        this.categoryIds = categoryIds;
     }
 
     public Long getId() { return id; }
@@ -51,4 +57,7 @@ public class RecipeSummaryDTO {
 
     public Integer getServings() { return servings; }
     public void setServings(Integer servings) { this.servings = servings; }
+
+    public List<Long> getCategoryIds() { return categoryIds; }
+    public void setCategoryIds(List<Long> categoryIds) { this.categoryIds = categoryIds; }
 }

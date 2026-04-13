@@ -106,6 +106,21 @@ public class RecipeService {
         recipeRepository.delete(recipe);
     }
 
+    @Transactional
+    public RecipeDTO updateCategories(Long id, List<Long> categoryIds, Long userId) {
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+
+        if (!recipe.getUser().getId().equals(userId)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        List<Category> categories = categoryRepository.findAllById(categoryIds);
+        recipe.setCategories(categories);
+
+        return convertToDTO(recipeRepository.save(recipe));
+    }
+
     public List<RecipeSummaryDTO> getRecipesByCategory(Long categoryId) {
         return recipeRepository.findByCategoriesId(categoryId).stream()
                 .map(this::convertToSummaryDTO)
@@ -126,13 +141,17 @@ public class RecipeService {
 
     private RecipeSummaryDTO convertToSummaryDTO(Recipe recipe) {
         String firstImageUrl = recipe.getImages().isEmpty() ? null : recipe.getImages().get(0).getUrl();
+        List<Long> categoryIds = recipe.getCategories() != null
+                ? recipe.getCategories().stream().map(Category::getId).collect(Collectors.toList())
+                : new java.util.ArrayList<>();
         return new RecipeSummaryDTO(
                 recipe.getId(),
                 recipe.getTitle(),
                 firstImageUrl,
                 recipe.getPrepTime(),
                 recipe.getCookTime(),
-                recipe.getServings()
+                recipe.getServings(),
+                categoryIds
         );
     }
 
