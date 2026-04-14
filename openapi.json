@@ -1,1 +1,1377 @@
-{"error":"Internal server error"}
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Recipes API",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Categories",
+            "description": "Category management APIs"
+        },
+        {
+            "name": "Sync",
+            "description": "Offline sync APIs"
+        },
+        {
+            "name": "Authentication",
+            "description": "Authentication management APIs"
+        },
+        {
+            "name": "Recipe Images",
+            "description": "Recipe image management APIs"
+        },
+        {
+            "name": "Favorites",
+            "description": "Favorite recipes management APIs"
+        },
+        {
+            "name": "Recipes",
+            "description": "Recipe management APIs"
+        }
+    ],
+    "paths": {
+        "/recipes/{id}": {
+            "get": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Get recipe by ID",
+                "operationId": "getRecipeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecipeDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Update an existing recipe",
+                "operationId": "updateRecipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecipeDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecipeDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Soft-delete a recipe",
+                "operationId": "deleteRecipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category by ID",
+                "operationId": "getCategoryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update a category",
+                "operationId": "updateCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Soft-delete a category",
+                "operationId": "deleteCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/sync": {
+            "get": {
+                "tags": [
+                    "Sync"
+                ],
+                "summary": "Pull changes from server. Omit 'since' for full dataset.",
+                "operationId": "pull",
+                "parameters": [
+                    {
+                        "name": "since",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SyncResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sync"
+                ],
+                "summary": "Push local changes to server",
+                "operationId": "push",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SyncPushRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SyncPushResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes": {
+            "get": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Get all recipes for the authenticated user",
+                "operationId": "getAllRecipes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RecipeSummaryDTO"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Create a new recipe",
+                "operationId": "createRecipe",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecipeDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecipeDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{recipeId}/images": {
+            "post": {
+                "tags": [
+                    "Recipe Images"
+                ],
+                "summary": "Add images to a recipe",
+                "operationId": "addImages",
+                "parameters": [
+                    {
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{id}/favorite": {
+            "get": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Check if recipe is in current user's favorites",
+                "operationId": "isFavorite",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Add recipe to favorites",
+                "operationId": "addFavorite",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Remove recipe from favorites",
+                "operationId": "removeFavorite",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories for the authenticated user",
+                "operationId": "getAllCategories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Category"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a new category",
+                "operationId": "createCategory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Authenticate user",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{id}/categories": {
+            "patch": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Update categories of a recipe",
+                "operationId": "updateCategories",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecipeDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/me/favorites": {
+            "get": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Get current user's favorites",
+                "operationId": "getMyFavorites",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FavoriteDTO"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{recipeId}/images/{imageRef}": {
+            "get": {
+                "tags": [
+                    "Recipe Images"
+                ],
+                "summary": "Get a specific image",
+                "operationId": "getImage",
+                "parameters": [
+                    {
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "imageRef",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recipe Images"
+                ],
+                "summary": "Delete an image from a recipe",
+                "operationId": "deleteImage",
+                "parameters": [
+                    {
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "imageRef",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/recipes/search": {
+            "get": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Search recipes by keyword",
+                "operationId": "searchRecipes",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RecipeSummaryDTO"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/category/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Get recipes by category",
+                "operationId": "getRecipesByCategory",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RecipeSummaryDTO"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RecipeDTO": {
+                "required": [
+                    "cookTime",
+                    "ingredients",
+                    "instructions",
+                    "prepTime",
+                    "servings",
+                    "title"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "title": {
+                        "maxLength": 200,
+                        "minLength": 0,
+                        "type": "string",
+                        "description": "Recipe title",
+                        "example": "Spaghetti Carbonara"
+                    },
+                    "description": {
+                        "maxLength": 1000,
+                        "minLength": 0,
+                        "type": "string",
+                        "description": "Short description of the recipe",
+                        "example": "Classic Italian pasta dish"
+                    },
+                    "ingredients": {
+                        "type": "string",
+                        "description": "List of ingredients (one per line)",
+                        "example": "200g spaghetti\n100g pancetta\n2 eggs"
+                    },
+                    "instructions": {
+                        "type": "string",
+                        "description": "Step-by-step instructions",
+                        "example": "1. Cook pasta\n2. Fry pancetta\n3. Mix eggs"
+                    },
+                    "prepTime": {
+                        "type": "integer",
+                        "description": "Preparation time in minutes",
+                        "format": "int32",
+                        "example": 15
+                    },
+                    "cookTime": {
+                        "type": "integer",
+                        "description": "Cooking time in minutes",
+                        "format": "int32",
+                        "example": 20
+                    },
+                    "servings": {
+                        "type": "integer",
+                        "description": "Number of servings",
+                        "format": "int32",
+                        "example": 4
+                    },
+                    "categoryIds": {
+                        "type": "array",
+                        "description": "IDs of the categories this recipe belongs to",
+                        "example": [
+                            2,
+                            5
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "description": "IDs of the categories this recipe belongs to",
+                            "format": "int64"
+                        }
+                    },
+                    "categoryNames": {
+                        "type": "array",
+                        "description": "Category names (populated on read)",
+                        "readOnly": true,
+                        "example": [
+                            "Pasta",
+                            "Italian"
+                        ],
+                        "items": {
+                            "type": "string",
+                            "description": "Category names (populated on read)",
+                            "readOnly": true,
+                            "example": "[\"Pasta\",\"Italian\"]"
+                        }
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "description": "ID of the user who created the recipe",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Username of the creator",
+                        "readOnly": true,
+                        "example": "john_doe"
+                    },
+                    "images": {
+                        "type": "array",
+                        "description": "Images attached to this recipe",
+                        "readOnly": true,
+                        "items": {
+                            "$ref": "#/components/schemas/RecipeImageDTO"
+                        }
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Creation timestamp",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update timestamp",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "description": "Soft delete timestamp, null if active",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "description": "Recipe data including ingredients, instructions and metadata"
+            },
+            "RecipeImageDTO": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Image ID",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "Stored filename",
+                        "readOnly": true,
+                        "example": "abc123.jpg"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "Public URL to access the image",
+                        "readOnly": true,
+                        "example": "http://localhost:8080/recipes/1/images/1"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Upload timestamp",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "description": "Image associated with a recipe",
+                "readOnly": true
+            },
+            "Category": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "description": {
+                        "maxLength": 500,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "CategoryPushItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "FavoritePushItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "recipeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "RecipePushItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "ingredients": {
+                        "type": "string"
+                    },
+                    "instructions": {
+                        "type": "string"
+                    },
+                    "prepTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "cookTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "servings": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "categoryIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "SyncPushRequest": {
+                "type": "object",
+                "properties": {
+                    "recipes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RecipePushItem"
+                        }
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CategoryPushItem"
+                        }
+                    },
+                    "favorites": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FavoritePushItem"
+                        }
+                    }
+                }
+            },
+            "IdMapping": {
+                "type": "object",
+                "properties": {
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "serverId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "SyncPushResponse": {
+                "type": "object",
+                "properties": {
+                    "recipeMappings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IdMapping"
+                        }
+                    },
+                    "categoryMappings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IdMapping"
+                        }
+                    },
+                    "favoriteMappings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IdMapping"
+                        }
+                    }
+                }
+            },
+            "AuthRequest": {
+                "required": [
+                    "email",
+                    "password",
+                    "username"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "maxLength": 50,
+                        "minLength": 0,
+                        "type": "string",
+                        "description": "Unique username",
+                        "example": "john_doe"
+                    },
+                    "email": {
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string",
+                        "description": "User email address",
+                        "example": "john@example.com"
+                    },
+                    "password": {
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "type": "string",
+                        "description": "Password (min 6 characters)",
+                        "example": "secret123"
+                    }
+                },
+                "description": "Registration data for a new user"
+            },
+            "AuthResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "description": "JWT access token",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Token type",
+                        "example": "Bearer",
+                        "default": "Bearer"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "User ID",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Username",
+                        "example": "john_doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "User email",
+                        "example": "john@example.com"
+                    }
+                },
+                "description": "Authentication response containing the JWT token and user info"
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "maxLength": 100,
+                        "minLength": 0,
+                        "type": "string",
+                        "description": "User email address",
+                        "example": "john@example.com"
+                    },
+                    "password": {
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "type": "string",
+                        "description": "User password",
+                        "example": "secret123"
+                    }
+                },
+                "description": "Credentials for user authentication"
+            },
+            "FavoriteDTO": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "recipeId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "SyncResponse": {
+                "type": "object",
+                "properties": {
+                    "recipes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RecipeDTO"
+                        }
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        }
+                    },
+                    "favorites": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FavoriteDTO"
+                        }
+                    },
+                    "serverTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "RecipeSummaryDTO": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Recipe title",
+                        "example": "Spaghetti Carbonara"
+                    },
+                    "firstImageUrl": {
+                        "type": "string",
+                        "description": "URL of the first image, or null if none",
+                        "example": "http://localhost:8080/recipes/1/images/1"
+                    },
+                    "prepTime": {
+                        "type": "integer",
+                        "description": "Preparation time in minutes",
+                        "format": "int32",
+                        "example": 15
+                    },
+                    "cookTime": {
+                        "type": "integer",
+                        "description": "Cooking time in minutes",
+                        "format": "int32",
+                        "example": 20
+                    },
+                    "servings": {
+                        "type": "integer",
+                        "description": "Number of servings",
+                        "format": "int32",
+                        "example": 4
+                    },
+                    "categoryIds": {
+                        "type": "array",
+                        "description": "IDs of the categories this recipe belongs to",
+                        "example": [
+                            2,
+                            5
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "description": "IDs of the categories this recipe belongs to",
+                            "format": "int64"
+                        }
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update timestamp",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "description": "Soft delete timestamp, null if active",
+                        "format": "date-time"
+                    }
+                },
+                "description": "Recipe summary for list views"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

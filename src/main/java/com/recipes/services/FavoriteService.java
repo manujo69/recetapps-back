@@ -1,7 +1,5 @@
 package com.recipes.services;
 
-import com.recipes.dto.RecipeSummaryDTO;
-import com.recipes.models.Category;
 import com.recipes.models.Favorite;
 import com.recipes.models.Recipe;
 import com.recipes.models.User;
@@ -12,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class FavoriteService {
@@ -29,9 +28,20 @@ public class FavoriteService {
 
     @Transactional
     public void addFavorite(Long userId, Long recipeId) {
-        if (favoriteRepository.existsByIdUserIdAndIdRecipeId(userId, recipeId)) {
+        // Check if an active favorite already exists
+        if (favoriteRepository.findByUserIdAndRecipeId(userId, recipeId).isPresent()) {
             throw new RuntimeException("Recipe is already in favorites");
         }
+
+        // Restore a soft-deleted favorite if one exists
+        Optional<Favorite> existing = favoriteRepository.findByUserIdAndRecipeIdIncludingDeleted(userId, recipeId);
+        if (existing.isPresent()) {
+            Favorite favorite = existing.get();
+            favorite.setDeletedAt(null);
+            favoriteRepository.save(favorite);
+            return;
+        }
+
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Recipe recipe = recipeRepository.findById(recipeId)
@@ -42,26 +52,22 @@ public class FavoriteService {
 
     @Transactional
     public void removeFavorite(Long userId, Long recipeId) {
-        if (!favoriteRepository.existsByIdUserIdAndIdRecipeId(userId, recipeId)) {
-            throw new RuntimeException("Recipe is not in favorites");
-        }
-        favoriteRepository.deleteByIdUserIdAndIdRecipeId(userId, recipeId);
+        Favorite favorite = favoriteRepository.findByUserIdAndRecipeId(userId, recipeId)
+                .orElseThrow(() -> new RuntimeException("Recipe is not in favorites"));
+
+        favorite.setDeletedAt(LocalDateTime.now());
+        favoriteRepository.save(favorite);
     }
 
-    public List<RecipeSummaryDTO> getFavoritesByUser(Long userId) {
-        return favoriteRepository.findByUserId(userId).stream()
-                .map(fav -> {
-                    Recipe r = fav.getRecipe();
-                    String firstImageUrl = r.getImages().isEmpty() ? null : r.getImages().get(0).getUrl();
-                    List<Long> categoryIds = r.getCategories() != null
-                            ? r.getCategories().stream().map(c -> c.getId()).collect(Collectors.toList())
-                            : new java.util.ArrayList<>();
-                    return new RecipeSummaryDTO(r.getId(), r.getTitle(), firstImageUrl, r.getPrepTime(), r.getCookTime(), r.getServings(), categoryIds);
-                })
-                .collect(Collectors.toList());
+    public List<Favorite> getFavoritesByUser(Long userId) {
+        return favoriteRepository.findByUserId(userId);
     }
 
     public boolean isFavorite(Long userId, Long recipeId) {
-        return favoriteRepository.existsByIdUserIdAndIdRecipeId(userId, recipeId);
+        return favoriteRepository.findByUserIdAndRecipeId(userId, recipeId).isPresent();
+    }
+
+    public List<Favorite> findUpdatedAfter(Long userId, LocalDateTime since) {
+        return favoriteRepository.findByUserIdUpdatedAfter(userId, since);
     }
 }

@@ -1,7 +1,9 @@
 package com.recipes.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Schema(description = "Recipe summary for list views")
@@ -28,9 +30,17 @@ public class RecipeSummaryDTO {
     @Schema(description = "IDs of the categories this recipe belongs to", example = "[2, 5]")
     private List<Long> categoryIds;
 
+    @Schema(description = "Last update timestamp")
+    private LocalDateTime updatedAt;
+
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    @Schema(description = "Soft delete timestamp, null if active")
+    private LocalDateTime deletedAt;
+
     public RecipeSummaryDTO() {}
 
-    public RecipeSummaryDTO(Long id, String title, String firstImageUrl, Integer prepTime, Integer cookTime, Integer servings, List<Long> categoryIds) {
+    public RecipeSummaryDTO(Long id, String title, String firstImageUrl, Integer prepTime, Integer cookTime,
+                            Integer servings, List<Long> categoryIds, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
         this.firstImageUrl = firstImageUrl;
@@ -38,6 +48,8 @@ public class RecipeSummaryDTO {
         this.cookTime = cookTime;
         this.servings = servings;
         this.categoryIds = categoryIds;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() { return id; }
@@ -60,4 +72,10 @@ public class RecipeSummaryDTO {
 
     public List<Long> getCategoryIds() { return categoryIds; }
     public void setCategoryIds(List<Long> categoryIds) { this.categoryIds = categoryIds; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public LocalDateTime getDeletedAt() { return deletedAt; }
+    public void setDeletedAt(LocalDateTime deletedAt) { this.deletedAt = deletedAt; }
 }

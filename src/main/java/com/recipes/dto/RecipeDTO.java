@@ -1,5 +1,6 @@
 package com.recipes.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -63,6 +64,10 @@ public class RecipeDTO {
     @Schema(description = "Last update timestamp", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime updatedAt;
 
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    @Schema(description = "Soft delete timestamp, null if active", accessMode = Schema.AccessMode.READ_ONLY)
+    private LocalDateTime deletedAt;
+
     // Constructors
     public RecipeDTO() {}
 
@@ -111,4 +116,7 @@ public class RecipeDTO {
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public LocalDateTime getDeletedAt() { return deletedAt; }
+    public void setDeletedAt(LocalDateTime deletedAt) { this.deletedAt = deletedAt; }
 }

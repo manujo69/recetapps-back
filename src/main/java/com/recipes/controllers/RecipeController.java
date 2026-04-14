@@ -26,10 +26,10 @@ public class RecipeController {
     private UserService userService;
 
     @GetMapping
-    @Operation(summary = "Get all recipes")
-    public ResponseEntity<List<RecipeSummaryDTO>> getAllRecipes() {
-        List<RecipeSummaryDTO> recipes = recipeService.getAllRecipes();
-        return ResponseEntity.ok(recipes);
+    @Operation(summary = "Get all recipes for the authenticated user")
+    public ResponseEntity<List<RecipeSummaryDTO>> getAllRecipes(Authentication authentication) {
+        Long userId = getUserId(authentication);
+        return ResponseEntity.ok(recipeService.getAllRecipes(userId));
     }
 
     @GetMapping("/{id}")
@@ -43,26 +43,21 @@ public class RecipeController {
     @PostMapping
     @Operation(summary = "Create a new recipe")
     public ResponseEntity<RecipeDTO> createRecipe(@Valid @RequestBody RecipeDTO recipeDTO, Authentication authentication) {
-        String username = authentication.getName();
-        Long userId = getUserIdFromUsername(username);
-        RecipeDTO createdRecipe = recipeService.createRecipe(recipeDTO, userId);
-        return ResponseEntity.ok(createdRecipe);
+        Long userId = getUserId(authentication);
+        return ResponseEntity.ok(recipeService.createRecipe(recipeDTO, userId));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing recipe")
     public ResponseEntity<RecipeDTO> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDTO, Authentication authentication) {
-        String username = authentication.getName();
-        Long userId = getUserIdFromUsername(username);
-        RecipeDTO updatedRecipe = recipeService.updateRecipe(id, recipeDTO, userId);
-        return ResponseEntity.ok(updatedRecipe);
+        Long userId = getUserId(authentication);
+        return ResponseEntity.ok(recipeService.updateRecipe(id, recipeDTO, userId));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a recipe")
+    @Operation(summary = "Soft-delete a recipe")
     public ResponseEntity<Void> deleteRecipe(@PathVariable Long id, Authentication authentication) {
-        String username = authentication.getName();
-        Long userId = getUserIdFromUsername(username);
+        Long userId = getUserId(authentication);
         recipeService.deleteRecipe(id, userId);
         return ResponseEntity.noContent().build();
     }
@@ -70,34 +65,26 @@ public class RecipeController {
     @PatchMapping("/{id}/categories")
     @Operation(summary = "Update categories of a recipe")
     public ResponseEntity<RecipeDTO> updateCategories(@PathVariable Long id, @RequestBody List<Long> categoryIds, Authentication authentication) {
-        String username = authentication.getName();
-        Long userId = getUserIdFromUsername(username);
+        Long userId = getUserId(authentication);
         return ResponseEntity.ok(recipeService.updateCategories(id, categoryIds, userId));
     }
 
     @GetMapping("/category/{categoryId}")
     @Operation(summary = "Get recipes by category")
-    public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByCategory(@PathVariable Long categoryId) {
-        List<RecipeSummaryDTO> recipes = recipeService.getRecipesByCategory(categoryId);
-        return ResponseEntity.ok(recipes);
-    }
-
-    @GetMapping("/user/{userId}")
-    @Operation(summary = "Get recipes by user")
-    public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByUser(@PathVariable Long userId) {
-        List<RecipeSummaryDTO> recipes = recipeService.getRecipesByUser(userId);
-        return ResponseEntity.ok(recipes);
+    public ResponseEntity<List<RecipeSummaryDTO>> getRecipesByCategory(@PathVariable Long categoryId, Authentication authentication) {
+        Long userId = getUserId(authentication);
+        return ResponseEntity.ok(recipeService.getRecipesByCategory(categoryId, userId));
     }
 
     @GetMapping("/search")
     @Operation(summary = "Search recipes by keyword")
-    public ResponseEntity<List<RecipeSummaryDTO>> searchRecipes(@RequestParam String keyword) {
-        List<RecipeSummaryDTO> recipes = recipeService.searchRecipes(keyword);
-        return ResponseEntity.ok(recipes);
+    public ResponseEntity<List<RecipeSummaryDTO>> searchRecipes(@RequestParam String keyword, Authentication authentication) {
+        Long userId = getUserId(authentication);
+        return ResponseEntity.ok(recipeService.searchRecipes(keyword, userId));
     }
 
-    private Long getUserIdFromUsername(String username) {
-        return userService.getUserIdByUsername(username)
+    private Long getUserId(Authentication authentication) {
+        return userService.getUserIdByUsername(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

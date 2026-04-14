@@ -1,6 +1,6 @@
 package com.recipes.controllers;
 
-import com.recipes.dto.RecipeSummaryDTO;
+import com.recipes.dto.FavoriteDTO;
 import com.recipes.services.FavoriteService;
 import com.recipes.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "Favorites", description = "Favorite recipes management APIs")
@@ -40,18 +41,20 @@ public class FavoriteController {
     }
 
     @GetMapping("/users/me/favorites")
-    @Operation(summary = "Get current user's favorite recipes")
-    public ResponseEntity<List<RecipeSummaryDTO>> getMyFavorites(Authentication authentication) {
+    @Operation(summary = "Get current user's favorites")
+    public ResponseEntity<List<FavoriteDTO>> getMyFavorites(Authentication authentication) {
         Long userId = getUserId(authentication);
-        return ResponseEntity.ok(favoriteService.getFavoritesByUser(userId));
+        List<FavoriteDTO> favorites = favoriteService.getFavoritesByUser(userId).stream()
+                .map(f -> new FavoriteDTO(f.getId(), f.getRecipe().getId(), f.getUpdatedAt(), f.getDeletedAt()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(favorites);
     }
 
     @GetMapping("/recipes/{id}/favorite")
     @Operation(summary = "Check if recipe is in current user's favorites")
     public ResponseEntity<Map<String, Boolean>> isFavorite(@PathVariable Long id, Authentication authentication) {
         Long userId = getUserId(authentication);
-        boolean favorite = favoriteService.isFavorite(userId, id);
-        return ResponseEntity.ok(Map.of("isFavorite", favorite));
+        return ResponseEntity.ok(Map.of("isFavorite", favoriteService.isFavorite(userId, id)));
     }
 
     private Long getUserId(Authentication authentication) {
