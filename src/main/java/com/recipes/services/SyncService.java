@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -154,15 +155,19 @@ public class SyncService {
         List<IdMapping> mappings = new ArrayList<>();
 
         for (FavoritePushItem item : items) {
-            if (item.getId() != null) {
-                favoriteRepository.findById(item.getId()).ifPresent(favorite -> {
-                    if (!favorite.getUser().getId().equals(user.getId())) return;
-                    if (item.getUpdatedAt() != null && favorite.getUpdatedAt() != null
-                            && item.getUpdatedAt().isAfter(favorite.getUpdatedAt())) {
-                        favorite.setDeletedAt(item.getDeletedAt());
-                        favoriteRepository.save(favorite);
-                    }
-                });
+            Optional<Favorite> existing = item.getId() != null
+                    ? favoriteRepository.findById(item.getId())
+                            .filter(f -> f.getUser().getId().equals(user.getId()))
+                    : favoriteRepository.findByUserIdAndRecipeIdIncludingDeleted(
+                            user.getId(), item.getRecipeId());
+
+            if (existing.isPresent()) {
+                Favorite favorite = existing.get();
+                if (item.getUpdatedAt() != null && favorite.getUpdatedAt() != null
+                        && item.getUpdatedAt().isAfter(favorite.getUpdatedAt())) {
+                    favorite.setDeletedAt(item.getDeletedAt());
+                    favoriteRepository.save(favorite);
+                }
             } else {
                 recipeRepository.findById(item.getRecipeId()).ifPresent(recipe -> {
                     Favorite favorite = new Favorite(user, recipe);
