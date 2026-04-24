@@ -1,5 +1,6 @@
 package com.recipes.controllers;
 
+import com.recipes.dto.RecipeImageDTO;
 import com.recipes.models.Recipe;
 import com.recipes.models.RecipeImage;
 import com.recipes.repositories.RecipeRepository;
@@ -38,7 +39,7 @@ public class RecipeImageController {
 
     @PostMapping
     @Operation(summary = "Add images to a recipe")
-    public ResponseEntity<String> addImages(@PathVariable Long recipeId,
+    public ResponseEntity<?> addImages(@PathVariable Long recipeId,
                                             @RequestParam(value = "image", required = false) MultipartFile image,
                                             @RequestParam(value = "files", required = false) List<MultipartFile> files,
                                             Authentication authentication) throws IOException {
@@ -57,15 +58,18 @@ public class RecipeImageController {
         if (image != null) allFiles.add(image);
         if (files != null) allFiles.addAll(files);
 
+        RecipeImage saved = null;
         for (MultipartFile file : allFiles) {
             String filename = fileStorageService.storeFile(file);
             String url = "/recipes/" + recipeId + "/images/" + filename;
-            RecipeImage recipeImage = new RecipeImage(filename, url, recipe);
-            recipe.getImages().add(recipeImage);
+            saved = new RecipeImage(filename, url, recipe);
+            recipe.getImages().add(saved);
         }
 
-        recipeRepository.save(recipe);
-        return ResponseEntity.ok("Images uploaded successfully");
+        Recipe updatedRecipe = recipeRepository.save(recipe);
+        RecipeImage lastImage = updatedRecipe.getImages().get(updatedRecipe.getImages().size() - 1);
+        RecipeImageDTO dto = new RecipeImageDTO(lastImage.getId(), lastImage.getFilename(), lastImage.getUrl(), lastImage.getCreatedAt());
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/{imageRef:.+}")
