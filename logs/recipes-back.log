@@ -1,0 +1,527 @@
+2026-04-28T17:25:20.711+02:00  INFO 9615 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : Starting RecipesBackApplication using Java 17.0.18 with PID 9615 (/home/manu/Projects/recipes-back/target/classes started by manu in /home/manu/Projects/recipes-back)
+2026-04-28T17:25:20.716+02:00  INFO 9615 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-28T17:25:21.254+02:00  INFO 9615 --- [recipes-back] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-28T17:25:21.305+02:00  INFO 9615 --- [recipes-back] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 5 JPA repository interfaces.
+2026-04-28T17:25:21.696+02:00  INFO 9615 --- [recipes-back] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-28T17:25:21.703+02:00  INFO 9615 --- [recipes-back] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-28T17:25:21.704+02:00  INFO 9615 --- [recipes-back] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-04-28T17:25:21.751+02:00  INFO 9615 --- [recipes-back] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-28T17:25:21.751+02:00  INFO 9615 --- [recipes-back] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1001 ms
+2026-04-28T17:25:21.870+02:00  INFO 9615 --- [recipes-back] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-28T17:25:22.157+02:00  INFO 9615 --- [recipes-back] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68e5c7ae
+2026-04-28T17:25:22.158+02:00  INFO 9615 --- [recipes-back] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-28T17:25:22.224+02:00  INFO 9615 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.22.3 by Redgate
+2026-04-28T17:25:22.224+02:00  INFO 9615 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2026-04-28T17:25:22.224+02:00  INFO 9615 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : 
+2026-04-28T17:25:22.241+02:00  INFO 9615 --- [recipes-back] [main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:3306/recipes_db (MySQL 8.0)
+2026-04-28T17:25:22.289+02:00  INFO 9615 --- [recipes-back] [main] o.f.core.internal.command.DbValidate     : Successfully validated 4 migrations (execution time 00:00.029s)
+2026-04-28T17:25:22.301+02:00  INFO 9615 --- [recipes-back] [main] o.f.core.internal.command.DbMigrate      : Current version of schema `recipes_db`: 4
+2026-04-28T17:25:22.305+02:00  INFO 9615 --- [recipes-back] [main] o.f.core.internal.command.DbMigrate      : Schema `recipes_db` is up to date. No migration necessary.
+2026-04-28T17:25:22.369+02:00  INFO 9615 --- [recipes-back] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-28T17:25:22.428+02:00  INFO 9615 --- [recipes-back] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2026-04-28T17:25:22.464+02:00  INFO 9615 --- [recipes-back] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-28T17:25:22.654+02:00  INFO 9615 --- [recipes-back] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-28T17:25:22.694+02:00  WARN 9615 --- [recipes-back] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-28T17:25:22.695+02:00  WARN 9615 --- [recipes-back] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-28T17:25:23.304+02:00  INFO 9615 --- [recipes-back] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-28T17:25:23.338+02:00  INFO 9615 --- [recipes-back] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-28T17:25:23.540+02:00  WARN 9615 --- [recipes-back] [main] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-04-28T17:25:23.541+02:00  WARN 9615 --- [recipes-back] [main] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-04-28T17:25:23.627+02:00  INFO 9615 --- [recipes-back] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-28T17:25:23.991+02:00  WARN 9615 --- [recipes-back] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-28T17:25:24.172+02:00  INFO 9615 --- [recipes-back] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@24f3d208, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7531ba53, org.springframework.security.web.context.SecurityContextHolderFilter@e0fbed5, org.springframework.security.web.header.HeaderWriterFilter@7834d8ec, org.springframework.web.filter.CorsFilter@72da5f0e, org.springframework.security.web.authentication.logout.LogoutFilter@fac6d4a, com.recipes.config.JwtAuthenticationFilter@5e572b08, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3681063, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74944d7f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3829e6ca, org.springframework.security.web.session.SessionManagementFilter@685e398, org.springframework.security.web.access.ExceptionTranslationFilter@585bfd45, org.springframework.security.web.access.intercept.AuthorizationFilter@ea2f3a]
+2026-04-28T17:25:24.365+02:00  INFO 9615 --- [recipes-back] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-04-28T17:25:24.371+02:00  INFO 9615 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : Started RecipesBackApplication in 3.942 seconds (process running for 4.17)
+2026-04-28T17:35:29.228+02:00  INFO 9615 --- [recipes-back] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-28T17:35:29.239+02:00  INFO 9615 --- [recipes-back] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-28T17:35:29.243+02:00  INFO 9615 --- [recipes-back] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-04-28T17:35:29.618+02:00  WARN 9615 --- [recipes-back] [http-nio-8080-exec-2] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/sync' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-04-28T17:35:29.631+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-2] org.zalando.logbook.Logbook              : Incoming Request: cadbfd17a82a3b28
+Remote: 127.0.0.1
+GET http://localhost:8080/sync HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: https://localhost
+sec-ch-ua: "Android WebView";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Linux; Android 13; CPH2145 Build/TP1A.220905.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/147.0.7727.55 Mobile Safari/537.36
+x-requested-with: com.recetapps.app
+2026-04-28T17:35:29.763+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-2] org.zalando.logbook.Logbook              : Outgoing Response: cadbfd17a82a3b28
+Duration: 129 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://localhost
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:29 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"recipes":[{"id":11,"title":"Pan amb tomaquet","description":"La típica receta catalana","ingredients":"4 rebanadas de pan de hogaza\n2 tomates muy maduros\nAOVE\nsal\n1 diente de ajo","instructions":"Tostar las rebanadas de pan en un tostador, o plancha u horno con grill, para que quede tostado por fuera y aún con miga jugosa por dentro.\n\nCortar los ajos por la mitad. Cortar los tomates por la mitad. En cada rebanada, restregar el medio ajo sobre el pan crujiente.\n\nRestregar después medio tomate en cada rebanada cubriendo perfectamente la superficie con tomate y añadir un chorro de aceite y una pizca de sal en escamas.","prepTime":15,"cookTime":15,"servings":4,"categoryIds":[9],"categoryNames":["Verduras"],"userId":2,"username":"Manuel","images":[{"id":9,"filename":"42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","url":"/recipes/11/images/42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","createdAt":"2026-04-23T12:42:19"}],"createdAt":"2026-04-23T12:40:47","updatedAt":"2026-04-27T19:02:32","deletedAt":null},{"id":12,"title":"Croquetas de pulpo","description":"Croquetas de pulpo","ingredients":"150 g de pulpo cocido\n50 g de mantequilla\n100 g de harina de trigo (50 g para la bechamel y 50 g para el rebozado)\n225 ml de agua de cocción del pulpo (en su defecto, leche o fumet)\n225 ml de leche entera\nSal\n2 cucharaditas de pimentón dulce\n1 huevo grande\n75 g de pan rallado\n300 ml de aceite para freír\n1 cucharada de mayonesa (opcional, para decorar)","instructions":"Picamos fino el pulpo cocido\nEmpezamos a preparar la bechamel con la mantequilla y la harina de trigo\nAñadimos el agua de cocción del pulpo y la leche para seguir con la bechamel\nAñadimos sal y un poco de pimentón dulce e incorporamos el pulpo picado\nMezclamos bien y trabajamos la masa de las croquetas 5 minutos\nColocamos la masa de las croquetas en un recipiente tapado con film y la dejamos enfriar en la nevera un mínimo de 4 horas\nFormamos las croquetas y las empanamos con harina, huevo y pan rallado\nFreímos las croquetas y las dejamos reposar en una fuente con papel absorbente\nServimos las croquetas de pulpo decoradas con una mezcla de mayonesa y pimentón, y espolvoreadas también con pimentón dulce","prepTime":21,"cookTime":25,"servings":4,"categoryIds":[10],"categoryNames":["Pescado"],"userId":2,"username":"Manuel","images":[{"id":10,"filename":"ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","url":"/recipes/12/images/ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","createdAt":"2026-04-23T12:47:29"}],"createdAt":"2026-04-23T12:46:34","updatedAt":"2026-04-27T19:03:11","deletedAt":null},{"id":32,"title":"Huevo de Nochevieja","description":"Huevo de Nochevieja","ingredients":"Un huevo\nUn rotulador negro","instructions":"Escribir en el huevo el nombre del año viejo\nLanzar contra el suelo para romperlo\nGritar: \"Feliz año nuevo\"","prepTime":1,"cookTime":0,"servings":1,"categoryIds":[11],"categoryNames":["Huevos"],"userId":2,"username":"Manuel","images":[{"id":31,"filename":"f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","url":"/recipes/32/images/f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","createdAt":"2026-04-24T18:53:54"}],"createdAt":"2026-04-24T18:53:54","updatedAt":"2026-04-27T19:04:08","deletedAt":null}],"categories":[{"id":9,"name":"Verduras","description":"Verduras","createdAt":"2026-04-27T19:02:23","updatedAt":"2026-04-27T19:02:23","deletedAt":null},{"id":10,"name":"Pescado","description":"Pescados y mariscos","createdAt":"2026-04-27T19:03:01","updatedAt":"2026-04-27T19:03:01","deletedAt":null},{"id":11,"name":"Huevos","description":"Platos con huevo","createdAt":"2026-04-27T19:03:53","updatedAt":"2026-04-27T19:03:53","deletedAt":null}],"favorites":[{"id":51,"recipeId":32,"updatedAt":"2026-04-27T18:05:39","deletedAt":null}],"serverTime":"2026-04-28T17:35:29.6571984"}
+2026-04-28T17:35:31.820+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-8] org.zalando.logbook.Logbook              : Incoming Request: de0e0bc0dfee960f
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/categories HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: http://localhost:4200
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.821+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-6] org.zalando.logbook.Logbook              : Incoming Request: b9c1fd96c74f9700
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/recipes HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: http://localhost:4200
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.822+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-7] org.zalando.logbook.Logbook              : Incoming Request: d69dd073d47dfab1
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/users/me/favorites HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: http://localhost:4200
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.831+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-8] org.zalando.logbook.Logbook              : Outgoing Response: de0e0bc0dfee960f
+Duration: 10 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:4200
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+[{"id":9,"name":"Verduras","description":"Verduras","createdAt":"2026-04-27T19:02:23","updatedAt":"2026-04-27T19:02:23","deletedAt":null},{"id":10,"name":"Pescado","description":"Pescados y mariscos","createdAt":"2026-04-27T19:03:01","updatedAt":"2026-04-27T19:03:01","deletedAt":null},{"id":11,"name":"Huevos","description":"Platos con huevo","createdAt":"2026-04-27T19:03:53","updatedAt":"2026-04-27T19:03:53","deletedAt":null}]
+2026-04-28T17:35:31.838+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-7] org.zalando.logbook.Logbook              : Outgoing Response: d69dd073d47dfab1
+Duration: 15 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:4200
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+[{"id":51,"recipeId":32,"updatedAt":"2026-04-27T18:05:39","deletedAt":null}]
+2026-04-28T17:35:31.840+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-6] org.zalando.logbook.Logbook              : Outgoing Response: b9c1fd96c74f9700
+Duration: 19 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:4200
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+[{"id":11,"title":"Pan amb tomaquet","firstImageUrl":"/recipes/11/images/42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","prepTime":15,"cookTime":15,"servings":4,"categoryIds":[9],"updatedAt":"2026-04-27T19:02:32","deletedAt":null},{"id":12,"title":"Croquetas de pulpo","firstImageUrl":"/recipes/12/images/ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","prepTime":21,"cookTime":25,"servings":4,"categoryIds":[10],"updatedAt":"2026-04-27T19:03:11","deletedAt":null},{"id":32,"title":"Huevo de Nochevieja","firstImageUrl":"/recipes/32/images/f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","prepTime":1,"cookTime":0,"servings":1,"categoryIds":[11],"updatedAt":"2026-04-27T19:04:08","deletedAt":null}]
+2026-04-28T17:35:31.858+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-1] org.zalando.logbook.Logbook              : Incoming Request: f18eb76ee9f2620c
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/recipes/11/images/42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp HTTP/1.1
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+connection: keep-alive
+host: localhost:8080
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: image
+sec-fetch-mode: no-cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.859+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-9] org.zalando.logbook.Logbook              : Incoming Request: 9bb299e778dae580
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/recipes/32/images/f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg HTTP/1.1
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+connection: keep-alive
+host: localhost:8080
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: image
+sec-fetch-mode: no-cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.859+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-10] org.zalando.logbook.Logbook              : Incoming Request: fb814bf5920978b4
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/recipes/12/images/ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp HTTP/1.1
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+connection: keep-alive
+host: localhost:8080
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: image
+sec-fetch-mode: no-cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:35:31.958+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-10] org.zalando.logbook.Logbook              : Outgoing Response: fb814bf5920978b4
+Duration: 99 ms
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Disposition: inline; filename="ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp"
+Content-Length: 22296
+Content-Type: image/webp
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+<binary>
+2026-04-28T17:35:31.963+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-1] org.zalando.logbook.Logbook              : Outgoing Response: f18eb76ee9f2620c
+Duration: 104 ms
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Disposition: inline; filename="42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp"
+Content-Length: 194276
+Content-Type: image/webp
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+<binary>
+2026-04-28T17:35:31.962+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-9] org.zalando.logbook.Logbook              : Outgoing Response: 9bb299e778dae580
+Duration: 103 ms
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Disposition: inline; filename="f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg"
+Content-Length: 325256
+Content-Type: image/jpeg
+Date: Tue, 28 Apr 2026 15:35:31 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+<binary>
+2026-04-28T17:35:59.282+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-3] org.zalando.logbook.Logbook              : Incoming Request: b6e268d891ee3379
+Remote: 127.0.0.1
+POST http://localhost:8080/auth/login HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
+connection: keep-alive
+content-length: 55
+content-type: application/json
+host: localhost:8080
+origin: https://localhost
+sec-ch-ua: "Android WebView";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Linux; Android 13; CPH2145 Build/TP1A.220905.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/147.0.7727.55 Mobile Safari/537.36
+x-requested-with: com.recetapps.app
+
+{"email":"manujo69@gmail.com","password":"Tagore_9299"}
+2026-04-28T17:35:59.483+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-3] org.zalando.logbook.Logbook              : Outgoing Response: b6e268d891ee3379
+Duration: 201 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://localhost
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:59 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYW51ZWwiLCJpYXQiOjE3NzczOTA1NTksImV4cCI6MTc3NzQ3Njk1OX0.p2hQ8YUvTBwbpWQkJtgQ509GxXDy91Klnu8tdVuuDSA","type":"Bearer","id":2,"username":"Manuel","email":"manujo69@gmail.com"}
+2026-04-28T17:35:59.621+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-4] org.zalando.logbook.Logbook              : Incoming Request: b3f27648b97915b5
+Remote: 127.0.0.1
+GET http://localhost:8080/sync HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: https://localhost
+sec-ch-ua: "Android WebView";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Linux; Android 13; CPH2145 Build/TP1A.220905.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/147.0.7727.55 Mobile Safari/537.36
+x-requested-with: com.recetapps.app
+2026-04-28T17:35:59.638+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-4] org.zalando.logbook.Logbook              : Outgoing Response: b3f27648b97915b5
+Duration: 16 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://localhost
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:35:59 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"recipes":[{"id":11,"title":"Pan amb tomaquet","description":"La típica receta catalana","ingredients":"4 rebanadas de pan de hogaza\n2 tomates muy maduros\nAOVE\nsal\n1 diente de ajo","instructions":"Tostar las rebanadas de pan en un tostador, o plancha u horno con grill, para que quede tostado por fuera y aún con miga jugosa por dentro.\n\nCortar los ajos por la mitad. Cortar los tomates por la mitad. En cada rebanada, restregar el medio ajo sobre el pan crujiente.\n\nRestregar después medio tomate en cada rebanada cubriendo perfectamente la superficie con tomate y añadir un chorro de aceite y una pizca de sal en escamas.","prepTime":15,"cookTime":15,"servings":4,"categoryIds":[9],"categoryNames":["Verduras"],"userId":2,"username":"Manuel","images":[{"id":9,"filename":"42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","url":"/recipes/11/images/42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","createdAt":"2026-04-23T12:42:19"}],"createdAt":"2026-04-23T12:40:47","updatedAt":"2026-04-27T19:02:32","deletedAt":null},{"id":12,"title":"Croquetas de pulpo","description":"Croquetas de pulpo","ingredients":"150 g de pulpo cocido\n50 g de mantequilla\n100 g de harina de trigo (50 g para la bechamel y 50 g para el rebozado)\n225 ml de agua de cocción del pulpo (en su defecto, leche o fumet)\n225 ml de leche entera\nSal\n2 cucharaditas de pimentón dulce\n1 huevo grande\n75 g de pan rallado\n300 ml de aceite para freír\n1 cucharada de mayonesa (opcional, para decorar)","instructions":"Picamos fino el pulpo cocido\nEmpezamos a preparar la bechamel con la mantequilla y la harina de trigo\nAñadimos el agua de cocción del pulpo y la leche para seguir con la bechamel\nAñadimos sal y un poco de pimentón dulce e incorporamos el pulpo picado\nMezclamos bien y trabajamos la masa de las croquetas 5 minutos\nColocamos la masa de las croquetas en un recipiente tapado con film y la dejamos enfriar en la nevera un mínimo de 4 horas\nFormamos las croquetas y las empanamos con harina, huevo y pan rallado\nFreímos las croquetas y las dejamos reposar en una fuente con papel absorbente\nServimos las croquetas de pulpo decoradas con una mezcla de mayonesa y pimentón, y espolvoreadas también con pimentón dulce","prepTime":21,"cookTime":25,"servings":4,"categoryIds":[10],"categoryNames":["Pescado"],"userId":2,"username":"Manuel","images":[{"id":10,"filename":"ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","url":"/recipes/12/images/ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","createdAt":"2026-04-23T12:47:29"}],"createdAt":"2026-04-23T12:46:34","updatedAt":"2026-04-27T19:03:11","deletedAt":null},{"id":32,"title":"Huevo de Nochevieja","description":"Huevo de Nochevieja","ingredients":"Un huevo\nUn rotulador negro","instructions":"Escribir en el huevo el nombre del año viejo\nLanzar contra el suelo para romperlo\nGritar: \"Feliz año nuevo\"","prepTime":1,"cookTime":0,"servings":1,"categoryIds":[11],"categoryNames":["Huevos"],"userId":2,"username":"Manuel","images":[{"id":31,"filename":"f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","url":"/recipes/32/images/f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","createdAt":"2026-04-24T18:53:54"}],"createdAt":"2026-04-24T18:53:54","updatedAt":"2026-04-27T19:04:08","deletedAt":null}],"categories":[{"id":9,"name":"Verduras","description":"Verduras","createdAt":"2026-04-27T19:02:23","updatedAt":"2026-04-27T19:02:23","deletedAt":null},{"id":10,"name":"Pescado","description":"Pescados y mariscos","createdAt":"2026-04-27T19:03:01","updatedAt":"2026-04-27T19:03:01","deletedAt":null},{"id":11,"name":"Huevos","description":"Platos con huevo","createdAt":"2026-04-27T19:03:53","updatedAt":"2026-04-27T19:03:53","deletedAt":null}],"favorites":[{"id":51,"recipeId":32,"updatedAt":"2026-04-27T18:05:39","deletedAt":null}],"serverTime":"2026-04-28T17:35:59.623604062"}
+2026-04-28T17:36:09.092+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-7] org.zalando.logbook.Logbook              : Incoming Request: dc126175a65aa5d0
+Remote: 127.0.0.1
+POST http://localhost:8080/sync HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: XXX
+connection: keep-alive
+content-length: 189
+content-type: application/json
+host: localhost:8080
+origin: https://localhost
+sec-ch-ua: "Android WebView";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Linux; Android 13; CPH2145 Build/TP1A.220905.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/147.0.7727.55 Mobile Safari/537.36
+x-requested-with: com.recetapps.app
+
+{"recipes":[],"categories":[{"clientId":"9","id":9,"name":"Verduras","description":"Verduras","updatedAt":"2026-04-28T15:36:08.252Z","deletedAt":"2026-04-28T15:36:08.252Z"}],"favorites":[]}
+2026-04-28T17:36:09.202+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-7] org.zalando.logbook.Logbook              : Outgoing Response: dc126175a65aa5d0
+Duration: 109 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://localhost
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:36:09 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"recipeMappings":[],"categoryMappings":[],"favoriteMappings":[]}
+2026-04-28T17:36:13.987+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-1] org.zalando.logbook.Logbook              : Incoming Request: d3c3d5d947116d1f
+Remote: 0:0:0:0:0:0:0:1
+GET http://localhost:8080/categories HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: http://localhost:4200
+referer: http://localhost:4200/
+sec-ch-ua: "Brave";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+sec-gpc: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+2026-04-28T17:36:13.995+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-1] org.zalando.logbook.Logbook              : Outgoing Response: d3c3d5d947116d1f
+Duration: 7 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:4200
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:36:13 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+[{"id":10,"name":"Pescado","description":"Pescados y mariscos","createdAt":"2026-04-27T19:03:01","updatedAt":"2026-04-27T19:03:01","deletedAt":null},{"id":11,"name":"Huevos","description":"Platos con huevo","createdAt":"2026-04-27T19:03:53","updatedAt":"2026-04-27T19:03:53","deletedAt":null}]
+2026-04-28T17:36:22.886+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-3] org.zalando.logbook.Logbook              : Incoming Request: e59b8554d5edaef6
+Remote: 127.0.0.1
+GET http://localhost:8080/sync HTTP/1.1
+accept: application/json, text/plain, */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: XXX
+connection: keep-alive
+host: localhost:8080
+origin: https://localhost
+sec-ch-ua: "Android WebView";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Linux; Android 13; CPH2145 Build/TP1A.220905.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/147.0.7727.55 Mobile Safari/537.36
+x-requested-with: com.recetapps.app
+2026-04-28T17:36:22.902+02:00 TRACE 9615 --- [recipes-back] [http-nio-8080-exec-3] org.zalando.logbook.Logbook              : Outgoing Response: e59b8554d5edaef6
+Duration: 15 ms
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://localhost
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Tue, 28 Apr 2026 15:36:22 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"recipes":[{"id":11,"title":"Pan amb tomaquet","description":"La típica receta catalana","ingredients":"4 rebanadas de pan de hogaza\n2 tomates muy maduros\nAOVE\nsal\n1 diente de ajo","instructions":"Tostar las rebanadas de pan en un tostador, o plancha u horno con grill, para que quede tostado por fuera y aún con miga jugosa por dentro.\n\nCortar los ajos por la mitad. Cortar los tomates por la mitad. En cada rebanada, restregar el medio ajo sobre el pan crujiente.\n\nRestregar después medio tomate en cada rebanada cubriendo perfectamente la superficie con tomate y añadir un chorro de aceite y una pizca de sal en escamas.","prepTime":15,"cookTime":15,"servings":4,"categoryIds":null,"categoryNames":null,"userId":2,"username":"Manuel","images":[{"id":9,"filename":"42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","url":"/recipes/11/images/42db6d4a-8068-41f7-93c6-a5a7544b5b44_pa-amb-tomaquet.webp","createdAt":"2026-04-23T12:42:19"}],"createdAt":"2026-04-23T12:40:47","updatedAt":"2026-04-27T19:02:32","deletedAt":null},{"id":12,"title":"Croquetas de pulpo","description":"Croquetas de pulpo","ingredients":"150 g de pulpo cocido\n50 g de mantequilla\n100 g de harina de trigo (50 g para la bechamel y 50 g para el rebozado)\n225 ml de agua de cocción del pulpo (en su defecto, leche o fumet)\n225 ml de leche entera\nSal\n2 cucharaditas de pimentón dulce\n1 huevo grande\n75 g de pan rallado\n300 ml de aceite para freír\n1 cucharada de mayonesa (opcional, para decorar)","instructions":"Picamos fino el pulpo cocido\nEmpezamos a preparar la bechamel con la mantequilla y la harina de trigo\nAñadimos el agua de cocción del pulpo y la leche para seguir con la bechamel\nAñadimos sal y un poco de pimentón dulce e incorporamos el pulpo picado\nMezclamos bien y trabajamos la masa de las croquetas 5 minutos\nColocamos la masa de las croquetas en un recipiente tapado con film y la dejamos enfriar en la nevera un mínimo de 4 horas\nFormamos las croquetas y las empanamos con harina, huevo y pan rallado\nFreímos las croquetas y las dejamos reposar en una fuente con papel absorbente\nServimos las croquetas de pulpo decoradas con una mezcla de mayonesa y pimentón, y espolvoreadas también con pimentón dulce","prepTime":21,"cookTime":25,"servings":4,"categoryIds":[10],"categoryNames":["Pescado"],"userId":2,"username":"Manuel","images":[{"id":10,"filename":"ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","url":"/recipes/12/images/ccdc2c0b-9592-4478-bcf0-0ecac28c86b3_croquetas.webp","createdAt":"2026-04-23T12:47:29"}],"createdAt":"2026-04-23T12:46:34","updatedAt":"2026-04-27T19:03:11","deletedAt":null},{"id":32,"title":"Huevo de Nochevieja","description":"Huevo de Nochevieja","ingredients":"Un huevo\nUn rotulador negro","instructions":"Escribir en el huevo el nombre del año viejo\nLanzar contra el suelo para romperlo\nGritar: \"Feliz año nuevo\"","prepTime":1,"cookTime":0,"servings":1,"categoryIds":[11],"categoryNames":["Huevos"],"userId":2,"username":"Manuel","images":[{"id":31,"filename":"f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","url":"/recipes/32/images/f5475809-bde5-4746-94ad-608c72fb1b80_martina-huevo.jpeg","createdAt":"2026-04-24T18:53:54"}],"createdAt":"2026-04-24T18:53:54","updatedAt":"2026-04-27T19:04:08","deletedAt":null}],"categories":[{"id":10,"name":"Pescado","description":"Pescados y mariscos","createdAt":"2026-04-27T19:03:01","updatedAt":"2026-04-27T19:03:01","deletedAt":null},{"id":11,"name":"Huevos","description":"Platos con huevo","createdAt":"2026-04-27T19:03:53","updatedAt":"2026-04-27T19:03:53","deletedAt":null}],"favorites":[{"id":51,"recipeId":32,"updatedAt":"2026-04-27T18:05:39","deletedAt":null}],"serverTime":"2026-04-28T17:36:22.889251503"}
+2026-04-28T18:49:41.489+02:00  INFO 9615 --- [recipes-back] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-28T18:49:41.512+02:00  INFO 9615 --- [recipes-back] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-28T18:49:41.532+02:00  INFO 9615 --- [recipes-back] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-28T18:49:50.874+02:00  INFO 115971 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : Starting RecipesBackApplication using Java 17.0.18 with PID 115971 (/home/manu/Projects/recipes-back/target/classes started by manu in /home/manu/Projects/recipes-back)
+2026-04-28T18:49:50.876+02:00  INFO 115971 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-28T18:49:51.400+02:00  INFO 115971 --- [recipes-back] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-28T18:49:51.448+02:00  INFO 115971 --- [recipes-back] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 5 JPA repository interfaces.
+2026-04-28T18:49:51.822+02:00  INFO 115971 --- [recipes-back] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-28T18:49:51.830+02:00  INFO 115971 --- [recipes-back] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-28T18:49:51.831+02:00  INFO 115971 --- [recipes-back] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-04-28T18:49:51.883+02:00  INFO 115971 --- [recipes-back] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-28T18:49:51.883+02:00  INFO 115971 --- [recipes-back] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 972 ms
+2026-04-28T18:49:52.005+02:00  INFO 115971 --- [recipes-back] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-28T18:49:52.282+02:00  INFO 115971 --- [recipes-back] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@165614f5
+2026-04-28T18:49:52.283+02:00  INFO 115971 --- [recipes-back] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-28T18:49:52.351+02:00  INFO 115971 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.22.3 by Redgate
+2026-04-28T18:49:52.351+02:00  INFO 115971 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2026-04-28T18:49:52.352+02:00  INFO 115971 --- [recipes-back] [main] o.f.c.internal.license.VersionPrinter    : 
+2026-04-28T18:49:52.389+02:00  INFO 115971 --- [recipes-back] [main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:3306/recipes_db (MySQL 8.0)
+2026-04-28T18:49:52.453+02:00  INFO 115971 --- [recipes-back] [main] o.f.core.internal.command.DbValidate     : Successfully validated 4 migrations (execution time 00:00.026s)
+2026-04-28T18:49:52.464+02:00  INFO 115971 --- [recipes-back] [main] o.f.core.internal.command.DbMigrate      : Current version of schema `recipes_db`: 4
+2026-04-28T18:49:52.468+02:00  INFO 115971 --- [recipes-back] [main] o.f.core.internal.command.DbMigrate      : Schema `recipes_db` is up to date. No migration necessary.
+2026-04-28T18:49:52.535+02:00  INFO 115971 --- [recipes-back] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-28T18:49:52.590+02:00  INFO 115971 --- [recipes-back] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2026-04-28T18:49:52.619+02:00  INFO 115971 --- [recipes-back] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-28T18:49:52.790+02:00  INFO 115971 --- [recipes-back] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-28T18:49:52.832+02:00  WARN 115971 --- [recipes-back] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-28T18:49:52.833+02:00  WARN 115971 --- [recipes-back] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-28T18:49:53.386+02:00  INFO 115971 --- [recipes-back] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-28T18:49:53.420+02:00  INFO 115971 --- [recipes-back] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-28T18:49:53.609+02:00  WARN 115971 --- [recipes-back] [main] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-04-28T18:49:53.610+02:00  WARN 115971 --- [recipes-back] [main] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2026-04-28T18:49:53.690+02:00  INFO 115971 --- [recipes-back] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-28T18:49:54.042+02:00  WARN 115971 --- [recipes-back] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-28T18:49:54.225+02:00  INFO 115971 --- [recipes-back] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@29701f1f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2c36c62a, org.springframework.security.web.context.SecurityContextHolderFilter@4430d9be, org.springframework.security.web.header.HeaderWriterFilter@67d361fa, org.springframework.web.filter.CorsFilter@3a273e53, org.springframework.security.web.authentication.logout.LogoutFilter@1e620fe7, com.recipes.config.JwtAuthenticationFilter@1fb379e4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f6cf9b2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d5caf3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@36fb5ba, org.springframework.security.web.session.SessionManagementFilter@16043cb9, org.springframework.security.web.access.ExceptionTranslationFilter@7d710482, org.springframework.security.web.access.intercept.AuthorizationFilter@5c3b3f04]
+2026-04-28T18:49:54.411+02:00  INFO 115971 --- [recipes-back] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-04-28T18:49:54.417+02:00  INFO 115971 --- [recipes-back] [main] com.recipes.RecipesBackApplication       : Started RecipesBackApplication in 3.813 seconds (process running for 4.03)
