@@ -1,6 +1,7 @@
 package com.recipes.controllers;
 
 import com.recipes.dto.RecipeImageDTO;
+import com.recipes.dto.StoredFile;
 import com.recipes.models.Recipe;
 import com.recipes.models.RecipeImage;
 import com.recipes.repositories.RecipeRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,9 +43,9 @@ public class RecipeImageController {
     @PostMapping
     @Operation(summary = "Add images to a recipe")
     public ResponseEntity<?> addImages(@PathVariable Long recipeId,
-                                            @RequestParam(value = "image", required = false) MultipartFile image,
-                                            @RequestParam(value = "files", required = false) List<MultipartFile> files,
-                                            Authentication authentication) throws IOException {
+                                       @RequestParam(value = "image", required = false) MultipartFile image,
+                                       @RequestParam(value = "files", required = false) List<MultipartFile> files,
+                                       Authentication authentication) throws IOException {
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
 
@@ -54,15 +57,17 @@ public class RecipeImageController {
             return ResponseEntity.status(403).body("Unauthorized");
         }
 
-        List<MultipartFile> allFiles = new java.util.ArrayList<>();
+        List<MultipartFile> allFiles = new ArrayList<>();
         if (image != null) allFiles.add(image);
         if (files != null) allFiles.addAll(files);
 
         RecipeImage saved = null;
         for (MultipartFile file : allFiles) {
-            String filename = fileStorageService.storeFile(file);
-            String url = "/recipes/" + recipeId + "/images/" + filename;
-            saved = new RecipeImage(filename, url, recipe);
+            StoredFile stored = fileStorageService.storeFile(file);
+            String url = stored.url() != null
+                    ? stored.url()
+                    : "/recipes/" + recipeId + "/images/" + stored.publicId();
+            saved = new RecipeImage(stored.publicId(), url, recipe);
             recipe.getImages().add(saved);
         }
 
@@ -74,7 +79,7 @@ public class RecipeImageController {
 
     @GetMapping("/{imageRef:.+}")
     @Operation(summary = "Get a specific image")
-    public ResponseEntity<Resource> getImage(@PathVariable Long recipeId, @PathVariable String imageRef) throws IOException {
+    public ResponseEntity<?> getImage(@PathVariable Long recipeId, @PathVariable String imageRef) throws IOException {
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
 
@@ -82,6 +87,13 @@ public class RecipeImageController {
                 .filter(img -> img.getFilename().equals(imageRef) || String.valueOf(img.getId()).equals(imageRef))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Image not found"));
+
+        // Cloudinary images are served directly via CDN
+        if (image.getUrl() != null && image.getUrl().startsWith("http")) {
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header(HttpHeaders.LOCATION, image.getUrl())
+                    .build();
+        }
 
         Path filePath = fileStorageService.loadFile(image.getFilename());
         Resource resource = new UrlResource(filePath.toUri());
