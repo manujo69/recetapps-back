@@ -1,0 +1,13 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.recetapps.app",
+      "sha256_cert_fingerprints": ["99:98:9A:9A:2E:25:0B:FF:21:F1:74:DB:4A:89:2B:25:AF:AF:00:5E:42:CE:BB:79:69:DF:71:E0:60:F4:C3:99"]
+    }
+  }
+]
